@@ -1,6 +1,9 @@
 name: auto add template comment to cuixiaorui/study-every-day issue
 
 on:
+  push:
+    branches:
+      - master
   schedule:
     - cron: '30 0 * * *'
 
@@ -16,4 +19,5 @@ jobs:
           env:
             GH_TOKEN: ${{ secret.GH_TOKEN }}
       - run: npm install
-      - run: npm test
+      - run: tsc
+      - run: node dist/index.js
