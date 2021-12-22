@@ -1,14 +1,12 @@
 name: auto add template comment to cuixiaorui/study-every-day issue
+
 on:
   schedule:
-    - cron "30 0 * * *"
+    - cron: '30 0 * * *'
+
 jobs:
   add-comment:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x]
 
     steps:
       - uses: actions/checkout@v2
