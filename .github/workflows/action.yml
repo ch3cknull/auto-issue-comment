@@ -18,6 +18,7 @@ jobs:
           node-version: '14'
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - run: echo $GH_TOKEN
       - run: npm install
       - run: tsc
       - run: node dist/index.js
