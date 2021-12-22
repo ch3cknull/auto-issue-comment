@@ -4,16 +4,12 @@
 
 ## 读书
 
-- [ ] 《书名 1》
-- [ ] 《书名 2》
+- [ ] 《CSS 新世界》
+- [ ] 阅读两篇技术文章
 
 ## 编码练习
 
 - [ ] mini-vue
 - [ ] 练习 TypeScript
 
-## 个人发展
-
-- [ ] 健身
-
-(该模板为自动生成)
+(该模板使用[ch3cknull/auto-issue-comment](https://github.com/ch3cknull/auto-issue-comment)自动生成)
