@@ -1,0 +1,54 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const octokit_1 = require("octokit");
+const fs_1 = __importDefault(require("fs"));
+const { GH_TOKEN } = process.env;
+const octokit = new octokit_1.Octokit({
+    auth: GH_TOKEN || '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',
+});
+const { listForRepo, createComment, listComments } = octokit.rest.issues;
+const repoInfo = {
+    owner: 'cuixiaorui',
+    repo: 'study-every-day',
+};
+let username = '';
+(async () => {
+    const { data: { login }, } = await octokit.rest.users.getAuthenticated();
+    username = login;
+})();
+// 因为 PR 也是 Issue，这里把所有的 PR 过滤掉
+async function getIssues() {
+    const { data } = await listForRepo(repoInfo);
+    return data.filter((s) => !s.pull_request);
+}
+async function commentIssue(issue, body) {
+    await createComment(Object.assign(Object.assign({}, repoInfo), { issue_number: issue.number, body: body }));
+}
+function getDate() {
+    let date = new Date();
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+async function getIssueComments(issue) {
+    return (await listComments(Object.assign(Object.assign({}, repoInfo), { issue_number: issue.number }))).data;
+}
+async function isCommented(issue) {
+    const comments = await getIssueComments(issue);
+    return comments.some((s) => s.user.login === username);
+}
+async function main() {
+    const templateText = fs_1.default.readFileSync('template.md', 'utf-8').toString();
+    const issueArray = (await getIssues()).filter((s) => s.title.includes(getDate()));
+    // if not issue, return
+    if (issueArray.length === 0)
+        return console.log('no issue');
+    const issue = issueArray[0];
+    // if already commented, return
+    if (await isCommented(issue))
+        return console.log('already commented');
+    await commentIssue(issue, templateText);
+    console.log('commented');
+}
+main();

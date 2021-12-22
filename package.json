@@ -1,0 +1,24 @@
+{
+  "name": "auto-issue-comment",
+  "version": "1.0.0",
+  "description": "每天自动向 study-every-day 发送评论，内容为每日计划的模板。",
+  "main": "dist/index.js",
+  "dependencies": {
+    "octokit": "^1.7.1"
+  },
+  "devDependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ch3cknull/auto-issue-comment.git"
+  },
+  "keywords": [],
+  "author": "ch3cknull",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ch3cknull/auto-issue-comment/issues"
+  },
+  "homepage": "https://github.com/ch3cknull/auto-issue-comment#readme"
+}
