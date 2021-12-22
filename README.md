@@ -6,6 +6,7 @@
 
 ## 如何使用
 
+0. fork本项目
 1. 修改 [template.md](./template.md) 为自己适合的模板
 2. 申请一个 token
 3. 在 repo 的 Settings 的 Secrets 里添加新的 Secret
