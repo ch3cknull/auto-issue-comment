@@ -16,8 +16,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-          env:
-            GH_TOKEN: ${{ secret.GH_TOKEN }}
+        env:
+          GH_TOKEN: ${{ secret.GH_TOKEN }}
       - run: npm install
       - run: tsc
       - run: node dist/index.js
