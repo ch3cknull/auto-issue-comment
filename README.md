@@ -1,6 +1,6 @@
 # Auto Template For study-every-day
 
-每天自动向 study-every-day 发送评论，内容为每日计划的模板。
+每天自动向 [study-every-day](https://github.com/cuixiaorui/study-every-day) 发送评论，内容为每日计划的模板。
 
 这样只需要自己修改已添加的模板就行了
 
