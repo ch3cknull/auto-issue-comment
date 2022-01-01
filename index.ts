@@ -39,7 +39,10 @@ async function commentIssue(issue: Issue, body: string) {
 
 function getDate() {
   let date = new Date()
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+  const fillZero = (num: number) => (num < 10 ? `0${num}` : num)
+  return `${date.getFullYear()}-${fillZero(date.getMonth() + 1)}-${fillZero(
+    date.getDate()
+  )}`
 }
 
 async function getIssueComments(issue: Issue) {
@@ -72,7 +75,7 @@ async function main() {
   if (await isCommented(issue)) return console.log('already commented')
 
   await commentIssue(issue, templateText)
-  console.log('commented')
+  console.log('commented successfully')
 }
 
 main()

@@ -26,7 +26,8 @@ async function commentIssue(issue, body) {
 }
 function getDate() {
     let date = new Date();
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    const fillZero = (num) => (num < 10 ? `0${num}` : num);
+    return `${date.getFullYear()}-${fillZero(date.getMonth() + 1)}-${fillZero(date.getDate())}`;
 }
 async function getIssueComments(issue) {
     return (await listComments(Object.assign(Object.assign({}, repoInfo), { issue_number: issue.number }))).data;
@@ -44,6 +45,6 @@ async function main() {
     if (await isCommented(issue))
         return console.log('already commented');
     await commentIssue(issue, templateText);
-    console.log('commented');
+    console.log('commented successfully');
 }
 main();
