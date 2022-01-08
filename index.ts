@@ -1,9 +1,10 @@
 import { Octokit } from 'octokit'
 import fs from 'fs'
 
-const { GH_TOKEN } = process.env
+const { GH_TOKEN, CANCEL_SUB } = process.env
 const octokit = new Octokit({ auth: GH_TOKEN })
 const { listForRepo, createComment, listComments } = octokit.rest.issues
+const { deleteThreadSubscription } = octokit.rest.activity
 
 const repoInfo = {
   owner: 'cuixiaorui',
@@ -35,6 +36,12 @@ async function commentIssue(issue: Issue, body: string) {
     issue_number: issue.number,
     body: body,
   })
+  if (CANCEL_SUB) {
+    await deleteThreadSubscription({
+      thread_id: issue.id,
+    })
+    console.log(`unsubscribed ${issue.title} successfully`)
+  }
 }
 
 function getDate() {
